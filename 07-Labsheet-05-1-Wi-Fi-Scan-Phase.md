@@ -456,8 +456,8 @@ void app_main(void) {
 
 | ลำดับ | ชื่อเครือข่าย (SSID) | MAC Address (BSSID) | ความแรงสัญญาณ (RSSI: dBm) | ช่องความถี่ (Channel) | ประเภทการเข้ารหัส (Encryption Type) |
 | :---: | :--- | :--- | :---: | :---: | :--- |
-| 1 | | | | | |
-| 2 | | | | | |
+| 1 | KMITL-WIFI | 78:17:BE:C0:7D:A1 | -48  dBm | 1 | OPEN (No Password) |
+| 2 | Mitsuren |  06:96:98:A0:C9:FF | -50 dBm | 11 | WPA2_PSK |
 | 3 | | | | | |
 | 4 | | | | | |
 | 5 | | | | | |
