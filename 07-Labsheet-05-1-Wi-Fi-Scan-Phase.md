@@ -499,6 +499,7 @@ esp_wifi_scan_start() สามารถทำงานได้ตามปก�
 ```
 
 ## LOG
+```
 oject/main/bootloader_start.c:25
 I (29) boot: ESP-IDF v5.5.1 2nd stage bootloader
 I (29) boot: compile time Aug  4 2026 11:28:53
@@ -668,4 +669,4 @@ I (11925) LAB_WIFI_SCAN:   [Phase 1 Completed: Wi-Fi Scan Finished]
 I (11935) LAB_WIFI_SCAN:   Program stopped after scanning. Auth/Assoc Phase not started.
 I (11945) LAB_WIFI_SCAN: ==================================================================
 I (11945) main_task: Returned from app_main()
-
+```
