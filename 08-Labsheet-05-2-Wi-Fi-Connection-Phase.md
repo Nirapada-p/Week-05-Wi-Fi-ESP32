@@ -388,6 +388,19 @@ void app_main(void) {
 ## 7. คำถามท้ายการทดลอง (Post-Lab Questions)
 
 1. เหตุใดการระบุ SSID ผิด (ข้อ 5.2.2) จึงส่งผลให้เกิด Disconnect Event ด้วย Reason Code `201` (`WIFI_REASON_NO_AP_FOUND`) ตั้งแต่เฟส Scan?
+```
+เพราะ ESP32 จะค้นหา Wi-Fi ตามชื่อ SSID ที่กำหนด แต่หา AP ชื่อนั้นไม่เจอ จึงเชื่อมต่อไม่ได้และแจ้ง Reason Code 201 ว่าไม่พบ Access Point ตั้งแต่ขั้นตอน Scan
+```
 2. เหตุใดการพิมพ์ Password ผิด (ข้อ 5.2.3) จึงผ่านเฟส Auth และ Assoc มาได้ แต่มาล้มเหลวในเฟส 4-Way Handshake (Reason Code `15` หรือ `204`)?
+```
+เพราะขั้นตอน Auth และ Association เป็นการเชื่อมต่อเบื้องต้น ยังไม่ได้ตรวจสอบ Password จริง ๆ พอถึง 4-Way Handshake จึงเริ่มตรวจสอบคีย์ที่สร้างจาก Password ถ้า Password ผิด คีย์ไม่ตรงกับ AP ทำให้ Handshake ไม่ผ่านและเกิด Disconnect
+```
 3. ลำดับการเกิด Event ระหว่าง **`WIFI_EVENT_STA_CONNECTED`** กับ **`IP_EVENT_STA_GOT_IP`** Event ใดเกิดขึ้นก่อนกัน และมีความหมายทางกายภาพของ Layer Network ต่างกันอย่างไร?
+```
+WIFI_EVENT_STA_CONNECTED เกิดก่อนคือ ESP32 เชื่อมต่อกับ AP ในระดับ Wi-Fi สำเร็จแล้ว
+ส่วน IP_EVENT_STA_GOT_IP เกิดทีหลังคือ ESP32 ได้รับ IP Address จาก DHCP แล้ว จึงสามารถสื่อสารบนเครือข่ายได้
+```
 4. สมาชิกตัวแปร `reason` ในโครงสร้าง `wifi_event_sta_disconnected_t` มีประโยชน์อย่างไรต่อการออกแบบระบบค้นหาสาเหตุและกู้คืนการเชื่อมต่อ (Auto-Reconnection Mechanism) ในแอปพลิเคชัน IoT?
+```
+reason ช่วยบอกว่าทำไม ESP32 ถึงหลุดจาก Wi-Fi เช่น Password ผิด ทำให้โปรแกรมเลือกวิธีแก้ไขได้เหมาะสม เช่น หยุด Retry หาก Password ผิด เพื่อไม่ให้ระบบพยายามเชื่อมต่อซ้ำโดยไม่จำเป็น
+```
