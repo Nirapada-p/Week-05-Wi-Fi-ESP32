@@ -338,6 +338,21 @@ void app_main(void) {
 ## 7. คำถามท้ายการทดลอง (Post-Lab Questions)
 
 1. **Association ID (AID)** คืออะไร มีบทบาทอย่างไรใน Phase 3 และส่งคืนมาในโครงสร้างข้อมูลตัวแปรใด?
+```
+หมายเลขที่ AP กำหนดให้แก่ ESP32 หลังจาก Association สำเร็จ เพื่อใช้ระบุที่อยู่ภายในเครือข่าย Wi-Fi ในระดับ 802.11 โดยค่า AID จะถูกส่งกลับมาใน Association Response
+และอ่านได้จากตัวแปร wifi_event_sta_connected_t.aid ใน Event WIFI_EVENT_STA_CONNECTED
+```
 2. เหตุใดการเชื่อมต่อ Wi-Fi ความปลอดภัยแบบ WPA2-PSK จึงสามารถผ่าน Phase 2 (Authentication) และ Phase 3 (Association) จนเกิด Event `WIFI_EVENT_STA_CONNECTED` ได้สำเร็จ แม้ผู้ใช้จะป้อนรหัสผ่าน (Password) ผิด?
+```
+เพราะ Phase 2 (Authentication) และ Phase 3 (Association) ยังไม่ใช่ขั้นตอนตรวจสอบรหัสผ่าน WPA2-PSK การตรวจสอบ Pre-Shared Key  ดังนั้น Password ผิดจึงทำให้ ESP32 ผ่าน Auth/Assoc
+และเกิด WIFI_EVENT_STA_CONNECTED ได้ก่อน แต่จะล้มเหลวในขั้นตอน 4-Way Handshake
+```
 3. หาก Router มีการตั้งค่า **MAC Address Filtering** (อนุญาตเฉพาะ MAC ที่ลงทะเบียน) ESP32 จะล้มเหลวในเฟสใด และจะส่ง Disconnect Reason Code ใดออกมา?
+```
+จะล้มเหลวใน Phase 2 Authentication เนื่องจาก AP ปฏิเสธการยืนยันตัวตนของ MAC ที่ไม่ได้รับอนุญาต และอาจพบ WIFI_REASON_AUTH_FAIL 
+```
 4. สรุปความแตกต่างสำคัญระหว่างจุดสิ้นสุดของ **Phase 3 (Link-Layer Connected)** กับจุดสิ้นสุดของ **Phase 5 (IP Address Assigned)**
+```
+Phase 3 ESP32 เชื่อมต่อกับ AP สำเร็จในระดับ Link Layer และได้รับ AID แต่ยังไม่ได้หมายเลข IP
+Phase 5 ESP32 ผ่านกระบวนการ DHCP และได้รับ IP Address ทำให้สามารถสื่อสารในระดับ IP กับอุปกรณ์อื่นในเครือข่ายได้
+```
