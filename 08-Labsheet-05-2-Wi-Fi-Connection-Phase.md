@@ -368,20 +368,20 @@ void app_main(void) {
 
 | ข้อการทดลอง | สถานการณ์ทดสอบ | Event สุดท้ายที่ได้รับ | ผลลัพธ์ (Passed/Failed) | Reason Code (Decimal / Hex) | คำอธิบาย Reason Code |
 | :---: | :--- | :---: | :---: | :---: | :--- |
-| **5.2.1** | SSID และ Password ถูกต้อง | | | | |
-| **5.2.2** | ระบุ SSID ผิด (ไม่มีในระบบ) | | | | |
-| **5.2.3** | ระบุ SSID ถูกต้อง แต่ Password ผิด | | | | |
+| **5.2.1** | SSID และ Password ถูกต้อง |  IP_EVENT_STA_GOT_IP | Passed | ไม่มี | เชื่อมต่อ AP สำเร็จและได้รับ IP จาก DHCP (172.20.10.2) |
+| **5.2.2** | ระบุ SSID ผิด (ไม่มีในระบบ) | WIFI_EVENT_STA_DISCONNECTED | Failed | 8 / 0x08 | WIFI_REASON_DISASSOC_STA_HAS_LEFT  ESP32 ถูกยกเลิกการเชื่อมต่อขณะหยุด Wi-Fi ก่อนเริ่มทดสอบ SSID ใหม่ จึง ไม่ใช่ NO_AP_FOUND (201) |
+| **5.2.3** | ระบุ SSID ถูกต้อง แต่ Password ผิด | WIFI_EVENT_STA_DISCONNECTED | Failed | 202 / 0xCA | WIFI_REASON_AUTH_FAIL — การยืนยันตัวตนไม่สำเร็จ เนื่องจากข้อมูลรับรอง/รหัสผ่านไม่ถูกต้อง |
 
 ### 6.2 บันทึกข้อมูลเครือข่ายจากการเชื่อมต่อสำเร็จ (ข้อ 5.2.1)
 
 | พารามิเตอร์เครือข่าย | ค่าที่ได้รับจริงจาก DHCP |
 | :--- | :--- |
-| **SSID** | |
-| **BSSID (MAC Address)** | |
-| **Channel** | |
-| **IP Address** | |
-| **Subnet Mask** | |
-| **Default Gateway** | |
+| **SSID** | Pang |
+| **BSSID (MAC Address)** | F6:81:98:9D:EE:87 |
+| **Channel** | 6 |
+| **IP Address** | 172.20.10.2 |
+| **Subnet Mask** | 255.255.255.240 |
+| **Default Gateway** | 172.20.10.1 |
 
 ---
 
