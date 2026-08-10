@@ -330,16 +330,16 @@ void app_main(void) {
 
 | ข้อการทดลอง | สถานการณ์ทดสอบ | Event `WIFI_EVENT_STA_CONNECTED` (เกิด/ไม่เกิด) | Event `IP_EVENT_STA_GOT_IP` (เกิด/ไม่เกิด) | ผลการทดลอง | Disconnect Reason Code (ถ้ามี) |
 | :---: | :--- | :---: | :---: | :---: | :--- |
-| **5.4.1** | Password ถูกต้อง | | | | |
-| **5.4.2** | Password ผิด | | | | |
+| **5.4.1** | Password ถูกต้อง | เกิด | เกิด | Passed | ไม่มี |
+| **5.4.2** | Password ผิด | ไม่เกิด | ไม่เกิด | Failed | 202 (0xCA) – WIFI_REASON_AUTH_FAIL |
 
 ### 6.2 บันทึกข้อมูล IP Network จาก Event `IP_EVENT_STA_GOT_IP` (ข้อ 5.4.1)
 
 | พารามิเตอร์ Network Layer | ค่าที่จัดสรรได้จริงจาก DHCP Server |
 | :--- | :--- |
-| **IP Address** | |
-| **Subnet Mask** | |
-| **Default Gateway** | |
+| **IP Address** | 172.20.10.2 |
+| **Subnet Mask** | 255.255.255.240 |
+| **Default Gateway** | 172.20.10.1 |
 
 ---
 
